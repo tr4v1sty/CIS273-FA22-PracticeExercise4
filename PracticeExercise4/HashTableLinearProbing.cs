@@ -128,7 +128,10 @@ namespace PracticeExercise4
             // rehash all the old/existing buckets into the new array/hashtable
             foreach( var bucket in oldBuckets)
             {
-                Add(bucket.Key, bucket.Value);
+                if( bucket.State == BucketState.Full)
+                {
+                    Add(bucket.Key, bucket.Value);
+                }
             }
         }
 
