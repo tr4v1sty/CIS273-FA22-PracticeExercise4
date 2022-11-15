@@ -100,7 +100,13 @@ namespace PracticeExercise4
         // O(n) - worst case
         public bool ContainsValue(V value)
         {
-            throw new NotImplementedException();
+            foreach (var bucket in buckets) 
+            {
+                if (bucket.State == BucketState.Full && bucket.Value.Equals(value)) { return true; }
+                
+            }
+            return false ;
+            
         }
 
         // O(1) - average case
@@ -135,16 +141,34 @@ namespace PracticeExercise4
         // O(n) - worst case
         public List<K> GetKeys()
         {
-            // List<K> keys = new List<K>();
-            // foreach (var buckets in buckets) ;
-            throw new NotImplementedException();
+             List<K> keys = new List<K>();
+            // for each bucket in buckets
+            foreach (var bucket in buckets)
+            {
+                if (bucket.State == BucketState.Full)
+                {// add key to the list if the bucket state is full
+                    keys.Add(bucket.Key);
+                }
+                
+            }
+            return keys;
         }
 
         // O(n) - average case
         // O(n) - worst case
         public List<V> GetValues()
         {
-            throw new NotImplementedException();
+            // same as keys but values
+            List<V> values = new List<V>();
+            foreach (var bucket in buckets)
+            {
+                if (bucket.State == BucketState.Full)
+                {
+                    values.Add(bucket.Value);
+                }
+
+            }
+            return values;
         }
 
         // O(1) - average case
