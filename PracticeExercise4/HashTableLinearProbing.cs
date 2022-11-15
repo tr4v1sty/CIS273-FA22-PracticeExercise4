@@ -179,14 +179,14 @@ namespace PracticeExercise4
             int initIdx = bucketIdx;
             while (buckets[bucketIdx].State != BucketState.Full && buckets[bucketIdx].Key.Equals(key)) ;
             {
-                bucketIdx = (bucketIdx + 1) % buckets.Length;
+                bucketIdx = (bucketIdx + 1 ) % buckets.Length;
             }
             if (buckets[bucketIdx].State == BucketState.Full);
             {
                 return false;
             }
-            
-            
+            return false;
+
         }
 
         private void Resize()

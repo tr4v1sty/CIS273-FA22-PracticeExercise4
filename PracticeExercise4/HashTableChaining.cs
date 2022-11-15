@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace PracticeExercise4
 {
@@ -100,13 +101,45 @@ namespace PracticeExercise4
         // TODO
         public bool ContainsValue(V value)
         {
-            throw new NotImplementedException();
+            foreach (var bucket in bucketListsArray)
+            {
+                if (bucket.Equals(value)) { return true; }
+            }
+            return false;
+
         }
 
         // TODO
         public V Get(K key)
         {
-            throw new NotImplementedException();
+            // compute the hash
+            int hash = Hash(key);
+
+            // compute the index
+            int index = hash % bucketListsArray.Length;
+
+            //find the list
+            var list = bucketListsArray[index];
+
+            // search the list for the key
+            
+            
+
+                foreach (var bucket in list)
+                {
+                    if (bucket.Key.Equals(key))
+                    {
+                        return bucket.Value;
+                    }
+                    else
+                    {
+                    throw new KeyNotFoundException();
+                    }
+                }
+            throw new KeyNotFoundException();
+
+
+
         }
 
         public List<K> GetKeys()
@@ -127,7 +160,9 @@ namespace PracticeExercise4
         // TODO
         public List<V> GetValues()
         {
+
             throw new NotImplementedException();
+         
         }
 
         public bool Remove(K key)
