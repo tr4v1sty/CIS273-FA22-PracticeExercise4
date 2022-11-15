@@ -74,7 +74,26 @@ namespace PracticeExercise4
         // O(n) - worst case
         public bool ContainsKey(K key)
         {
-            throw new NotImplementedException();
+            int hash = Hash(key);
+            int bucketIdx = hash % buckets.Length;
+            int initIdx = bucketIdx;
+
+            while (buckets[bucketIdx].State != BucketState.EmptySinceStart)
+            {
+                // if bucket is full and contains the key return true
+                if (buckets[bucketIdx].State == BucketState.Full && buckets[bucketIdx].Key.Equals(key))
+                {
+                    return true;
+                }
+                // ++length for buckets
+                bucketIdx = (bucketIdx + 1) % buckets.Length;
+                // if == init then the bucket is empty
+                if(bucketIdx == initIdx)
+                {
+                    return false;
+                }
+            }
+            return false;
         }
 
         // O(n) - average case
@@ -88,13 +107,36 @@ namespace PracticeExercise4
         // O(n) - worst case
         public V Get(K key)
         {
-            throw new NotImplementedException();
+            int hash = Hash(key);
+            int bucketIdx = hash % buckets.Length;
+            int initIdx = bucketIdx;
+            while (buckets[bucketIdx].State != BucketState.EmptySinceStart)
+            {
+                if (buckets[bucketIdx].State == BucketState.Full && buckets[bucketIdx].Key.Equals(key))
+                {
+                    return buckets[bucketIdx].Value;
+                }
+
+                bucketIdx = (bucketIdx + 1) % buckets.Length;
+
+                if (bucketIdx == initIdx)
+                {
+                    throw new KeyNotFoundException();
+                }
+            }
+            throw new KeyNotFoundException();
         }
+
+    
+
+       
 
         // O(n) - average case
         // O(n) - worst case
         public List<K> GetKeys()
         {
+            // List<K> keys = new List<K>();
+            // foreach (var buckets in buckets) ;
             throw new NotImplementedException();
         }
 
