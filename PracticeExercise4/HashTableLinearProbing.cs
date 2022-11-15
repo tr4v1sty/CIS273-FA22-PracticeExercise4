@@ -103,7 +103,6 @@ namespace PracticeExercise4
             foreach (var bucket in buckets) 
             {
                 if (bucket.State == BucketState.Full && bucket.Value.Equals(value)) { return true; }
-                
             }
             return false ;
             
@@ -175,7 +174,19 @@ namespace PracticeExercise4
         // O(n) - worst case
         public bool Remove(K key)
         {
-            throw new NotImplementedException();
+            int hash = Hash(key);
+            int bucketIdx = hash % buckets.Length;
+            int initIdx = bucketIdx;
+            while (buckets[bucketIdx].State != BucketState.Full && buckets[bucketIdx].Key.Equals(key)) ;
+            {
+                bucketIdx = (bucketIdx + 1) % buckets.Length;
+            }
+            if (buckets[bucketIdx].State == BucketState.Full);
+            {
+                return false;
+            }
+            
+            
         }
 
         private void Resize()
