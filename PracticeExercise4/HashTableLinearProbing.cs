@@ -177,16 +177,24 @@ namespace PracticeExercise4
             int hash = Hash(key);
             int bucketIdx = hash % buckets.Length;
             int initIdx = bucketIdx;
-            while (buckets[bucketIdx].State != BucketState.Full && buckets[bucketIdx].Key.Equals(key)) ;
+            while (buckets[bucketIdx].State != BucketState.EmptySinceStart)
             {
-                bucketIdx = (bucketIdx + 1 ) % buckets.Length;
-            }
-            if (buckets[bucketIdx].State == BucketState.Full);
-            {
-                return false;
+
+
+                if (buckets[bucketIdx].State == BucketState.Full && buckets[bucketIdx].Key.Equals(key))
+                {
+                    count --;
+                    buckets[bucketIdx].Clear();
+                    return true;
+                }
+                bucketIdx = (bucketIdx + 1) % buckets.Length;
+                if (bucketIdx == initIdx)
+                {
+                    return false;
+                }
+
             }
             return false;
-
         }
 
         private void Resize()

@@ -101,9 +101,14 @@ namespace PracticeExercise4
         // TODO
         public bool ContainsValue(V value)
         {
-            foreach (var bucket in bucketListsArray)
+            
+            foreach (var list in bucketListsArray)
             {
-                if (bucket.Equals(value)) { return true; }
+                foreach( var bucket in list)
+                {
+                    if (bucket.Equals(value)) { return true; }
+                }
+                
             }
             return false;
 
