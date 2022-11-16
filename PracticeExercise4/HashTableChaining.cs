@@ -161,8 +161,18 @@ namespace PracticeExercise4
         public List<V> GetValues()
         {
 
-            throw new NotImplementedException();
-         
+            List<V> values = new List<V>();
+
+            foreach (LinkedList<Bucket<K, V>> list in bucketListsArray)
+            {
+                foreach (var bucket in list)
+                {
+                    values.Add(bucket.Value);
+                }
+            }
+
+            return values;
+
         }
 
         public bool Remove(K key)
